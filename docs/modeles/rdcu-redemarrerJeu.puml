@@ -1,1 +1,18 @@
-// Vous devez complétéer ce fichier
+@startuml
+
+title RDCU pour redémarrerJeu
+
+participant ":JeuDeDes" as jeu
+participant "joueurs:\nMap<String, Joueur>" as joueur
+
+[-> jeu: redemarrerJeu()
+
+note right : selon Contrôleur(JeuDeDés est l'objet racine)
+
+jeu -> joueur : clear()
+
+
+note right : selon Expert
+
+
+@enduml

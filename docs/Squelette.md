@@ -1,9 +1,9 @@
 # Identification de l'étudiant
 
-- <nomComplet1>Entrer votre nom</nomComplet1>
-- <courriel1>Entrer votre courriel</courriel1>
-- <codeMoodle1>Entrer votre code moodle obtenu à partir de Signets, 2 lettres majuscule avec 5 chiffres</codeMoodle1>
-- <githubAccount1>Entrer l'identifiant de votre compte github</githubAccount1>
+- <nomComplet1>Felix Parent</nomComplet1>
+- <courriel1>felix.parent.1@ens.etsmtl.ca</courriel1>
+- <codeMoodle1>PARF84340401</codeMoodle1>
+- <githubAccount1>pupil247</githubAccount1>
 
 # Squelette pour un API simple dans Node, Express et TypeScript
 
@@ -140,13 +140,13 @@ Pour plus d'informations au sujet de l'utilisation des breakpoints dans WebStorm
 
 Dans un design favorisant la maintenabilité, on évite que la couche Présentation ait la responsabilité de gérer les évènements système (opérations système). Larman présente dans son livre un exemple avec un JFrame (en Java Swing) à la figure F16.24. On l'adapte ici au contexte d'un service Web dans le framework Express (Node.js):
 
-![Diagramme de séparation des couches avec une opération système envoyée au contrôleur GRASP](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/figure-f16.24-web.puml)
+![Diagramme de séparation des couches avec une opération système envoyée au contrôleur GRASP](./modeles/figure-f16.24-web/figureF16.24-web.svg)
 
 Dans la figure ci-dessus, l'objet `:JeuDeDes` (qui est un objet en dehors de la couche présentation) reçoit l'opération système `demarrerJeu(nom)` selon le principe GRASP Contrôleur. Ce squelette respecte cette séparation.
 
 Voici la même figure, mais sous forme de diagramme de séquence avec l'acteur. On y voit tous les détails sordides de l'implémentation avec Node Express. **Notez que cette figure est présentée pour faciliter la compréhension seulement. On ne produit pas ce genre de diagramme dans la méthodologie**.
 
-![Une opération système du DSS est envoyée par la couche présentation et reçue par un objet (le contrôleur GRASP) dans la couche domaine](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/dss-details-demarrerJeu.puml)
+![Une opération système du DSS est envoyée par la couche présentation et reçue par un objet (le contrôleur GRASP) dans la couche domaine](./modeles/dss-details-demarrerJeu/dss-details-demarrerJeu.svg)
 
 ## Artefacts d'analyse et de conception
 
@@ -163,17 +163,31 @@ Voici la même figure, mais sous forme de diagramme de séquence avec l'acteur. 
 4. Le Joueur demande à terminer le jeu.
 1. ~~Le Système affiche un tableau de bord avec les noms des joueurs et le ratio des parties gagnées (nombre de fois gagné / nombre de lancers).~~
 
+#### Redémarrer
+
+  1. Le Joueur demande à redémarrer l'application.
+  2. Le Système termine tous les jeux en cours et redémarre l'application.
+
 ### Diagramme de cas d'utilisation
 
-![Diagramme de cas d'utilisation](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/dcu.puml)
+![Diagramme de cas d'utilisation](./modeles/dcu/Diagramme%20de%20cas%20d'utilisation.svg)
 
 ### Modèle du domaine
 
-![Diagramme de classe du Modèle du domaine](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/mdd.puml)
+![Diagramme de classe du Modèle du domaine](./modeles/mdd/MDD.svg)
 
 ### Diagramme de séquence système (DSS)
 
-![Diagramme de séquence système](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/dss-jouer.puml)
+#### Jouer
+![Diagramme de séquence système](./modeles/dss-jouer/dss-jouer.svg)
+
+#### Redémarrer
+![Diagramme de séquence système](./modeles/dss-redemarrerJeu/dss-redemarrerJeu.svg)
+
+
+### Diagramme de classes logicielles
+
+![App](./modeles/App/App.svg) 
 
 ### Contrats d'opération et Réalisations de cas d'utilisation (RDCU)
 
@@ -187,7 +201,7 @@ Voici la même figure, mais sous forme de diagramme de séquence avec l'acteur. 
 
 **RDCU**
 
-![Diagramme de séquence, demarrerJeu](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/rdcu-demarrerJeu.puml)
+![Diagramme de séquence, démarrerJeu](./modeles/rdcu-demarrerJeu/rdcu-demarrerJeu.svg)
 
 #### Opération: `jouer(nom:String)`
 
@@ -195,12 +209,13 @@ Voici la même figure, mais sous forme de diagramme de séquence avec l'acteur. 
 
 - d1.valeur est devenue un nombre entier aléatoire entre 1 et 6
 - d2.valeur est devenue un nombre entier aléatoire entre 1 et 6
+- d3.valeur est devenue un nombre entier aléatoire entre 1 et 6
 - j.nbLancers a été incrémenté sur une base de correspondance avec nom
-- j.nbLancersGagnés a été incrémenté si la totale de d1.valeur et d2.valeur est égale à 7
+- j.nbLancersGagnés a été incrémenté si la totale de d1.valeur, d2.valeur, d3.valeur est plus petite ou égale à 10
 
 **RDCU**
 
-![Diagramme de séquence, jouer](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/rdcu-jouer.puml)
+![Diagramme de séquence, jouer](./modeles/rdcu-jouer/rdcu-jouer.svg)
 
 #### Opération: `terminerJeu(nom:String)`
 
@@ -208,6 +223,16 @@ Voici la même figure, mais sous forme de diagramme de séquence avec l'acteur. 
 
 - L'instance j de Joueur a été supprimée sur une base de correspondance avec nom
 
-![Diagramme de séquence, terminerJeu](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/rdcu-terminerJeu.puml)
+**RDCU**
+
+![Diagramme de séquence, terminerJeu](./modeles/rdcu-terminerJeu/rdcu-terminerJeu.svg)
+
+#### Opération: `redémarrerJeu()`
+
+**Postconditions**
+
+- L'instance j de Joueur a été supprimée sur une base de correspondance avec nom
+
+![Diagramme de séquence, redémarrerJeu](./modeles/rdcu-redemarrerJeu/rdcu-redemarrerJeu.svg)
 
 [README.md](../README.md)
