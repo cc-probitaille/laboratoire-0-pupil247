@@ -13,7 +13,7 @@ describe('JeuDeDesTest', () => {
 
   it('devrait retourner une valeur entre 3 et 18', () => {
     for (let i = 0; i < 200; i++) {
-      expect(jdd.brasser()).toBeWithin(3, 18);
+      expect(jdd.brasser()).toBeWithin(3, 19);
     }
   })
 

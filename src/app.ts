@@ -66,7 +66,7 @@ class App {
       const joueurs: Array<Joueur> = JSON.parse(jeuRoutes.controleurJeu.joueurs);
       const joueursAvecRatio = joueurs.map(function(ele){
         
-        return {...ele,ratio: ele.lancers > 0 ? ele.lancersGagnes/ele.lancers : 0};
+        return {...ele,ratio:  ele.lancersGagnes/ele.lancers };
       })
       res.render('stats',
         // passer objet au gabarit (template) Pug
